@@ -28,7 +28,7 @@ export function effects(
         return next(itemUnavailable());
       }
 
-      const coinsSum = machine.loadedCoins.reduce(
+      const coinsSum = machine.coinsInSlot.reduce(
         (prev, next) => prev + next,
         0,
       );
@@ -48,7 +48,7 @@ export function effects(
     }
 
     case 'cant-process-order':
-      return next(dispenseChangeAttempt(machine.loadedCoins));
+      return next(dispenseChangeAttempt(machine.coinsInSlot));
 
     case 'dispense-item-attempt':
       {

@@ -4,13 +4,13 @@ import { Coin, InventoryItem, Machine, State } from './models';
 
 export function reducer(machine: Machine, action: Action<unknown>): Machine {
   switch (action.name) {
-    case 'add-coin':
+    case 'insert-coin':
       {
-        const coins = machine.loadedCoins.push(action.payload as Coin);
+        const coins = machine.coinsInSlot.push(action.payload as Coin);
 
         machine = machine
-          .set('loadedCoins', coins)
-          .set('state', State.CoinsLoaded);
+          .set('coinsInSlot', coins)
+          .set('state', State.CoinsInserted);
       }
       break;
 
@@ -56,21 +56,21 @@ export function reducer(machine: Machine, action: Action<unknown>): Machine {
     case 'dispense-change-success':
       {
         const change = action.payload as List<Coin>;
-        let availableCoins = machine.availableCoins;
+        let coins = machine.coins;
 
-        machine.loadedCoins.forEach((c) => {
-          const currentCoins = availableCoins.get(c) || 0;
-          availableCoins = availableCoins.set(c, currentCoins + 1);
+        machine.coinsInSlot.forEach((c) => {
+          const currentCoins = coins.get(c) || 0;
+          coins = coins.set(c, currentCoins + 1);
         });
 
         change.forEach((c: Coin) => {
-          const currentCoins = availableCoins.get(c) || 1;
-          availableCoins = availableCoins.set(c, currentCoins - 1);
+          const currentCoins = coins.get(c) || 1;
+          coins = coins.set(c, currentCoins - 1);
         });
 
         machine = machine
-          .set('loadedCoins', List([]))
-          .set('availableCoins', availableCoins)
+          .set('coinsInSlot', List([]))
+          .set('coins', coins)
           .set('state', State.StandBy);
       }
       break;

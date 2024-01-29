@@ -32,7 +32,7 @@ export class InventoryItem extends inventoryItemRecord {
 
 export enum State {
   StandBy,
-  CoinsLoaded,
+  CoinsInserted,
   ItemNotFound,
   ItemUnavailable,
   InsufficientCredit,
@@ -46,15 +46,15 @@ export enum State {
 
 interface MachineConfig {
   state?: State;
-  loadedCoins?: List<Coin>;
-  availableCoins?: Map<Coin, number>;
+  coinsInSlot?: List<Coin>;
+  coins?: Map<Coin, number>;
   items?: Map<number, List<InventoryItem>>;
 }
 
 const machineRecord = Record({
   state: State.StandBy,
-  loadedCoins: List<Coin>([]),
-  availableCoins: Map<Coin, number>([]),
+  coinsInSlot: List<Coin>([]),
+  coins: Map<Coin, number>([]),
   items: Map<number, List<InventoryItem>>([]),
 });
 

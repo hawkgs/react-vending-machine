@@ -2,7 +2,7 @@ import { List } from 'immutable';
 import { Coin, InventoryItem } from './models';
 
 type ActionType =
-  | 'add-coin'
+  | 'insert-coin'
   | 'enter-code'
   | 'item-not-found'
   | 'item-unavailable'
@@ -18,8 +18,8 @@ export interface Action<T> {
   payload?: T;
 }
 
-export const addCoin = (coin: Coin): Action<number> => ({
-  name: 'add-coin',
+export const insertCoin = (coin: Coin): Action<number> => ({
+  name: 'insert-coin',
   payload: coin,
 });
 
