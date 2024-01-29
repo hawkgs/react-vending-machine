@@ -1,7 +1,10 @@
 import 'screen.css';
+import { Machine } from '../../state/models';
 
-interface ScreenProps {}
+interface ScreenProps {
+  machine: Machine;
+}
 
-export default function Screen() {
+export default function Screen({ machine }: ScreenProps) {
   return <div></div>;
 }
