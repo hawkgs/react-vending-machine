@@ -1,10 +1,23 @@
 import { Machine } from '../../state/models';
-import './Inventory.module.css';
+import Items from '../items/Items';
+import styles from './Inventory.module.css';
 
 interface InventoryProps {
   machine: Machine;
 }
 
 export default function Inventory({ machine }: InventoryProps) {
-  return <div></div>;
+  return (
+    <div className={styles.inventory}>
+      {machine.items.toArray().map(([code, items]) => (
+        <div key={code}>
+          <div className={styles.code}>{code}</div>
+          <div className={styles.price}>
+            ${((items.first()?.price || 0) / 100).toFixed(2)}
+          </div>
+          <Items items={items} />
+        </div>
+      ))}
+    </div>
+  );
 }
