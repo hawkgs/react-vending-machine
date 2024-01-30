@@ -40,14 +40,14 @@ interface MachineConfig {
   state?: State;
   coinsInSlot?: List<Coin>;
   coins?: Map<Coin, number>;
-  items?: Map<number, List<InventoryItem>>;
+  items?: Map<string, List<InventoryItem>>;
 }
 
 const machineRecord = Record({
   state: State.StandBy,
   coinsInSlot: List<Coin>([]),
   coins: Map<Coin, number>([]),
-  items: Map<number, List<InventoryItem>>([]),
+  items: Map<string, List<InventoryItem>>([]),
 });
 
 export class Machine extends machineRecord {

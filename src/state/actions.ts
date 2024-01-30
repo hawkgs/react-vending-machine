@@ -23,7 +23,7 @@ export const insertCoin = (coin: Coin): Action<number> => ({
   payload: coin,
 });
 
-export const enterCode = (code: number): Action<number> => ({
+export const enterCode = (code: string): Action<string> => ({
   name: 'enter-code',
   payload: code,
 });
@@ -45,17 +45,17 @@ export const cantProcessOrder = (): Action<void> => ({
 });
 
 export const dispenseItemAttempt = (
-  code: number,
+  code: string,
   change: List<Coin>,
-): Action<{ code: number; change: List<Coin> }> => ({
+): Action<{ code: string; change: List<Coin> }> => ({
   name: 'dispense-item-attempt',
   payload: { code, change },
 });
 
 export const dispenseItemSuccess = (
-  code: number,
+  code: string,
   change: List<Coin>,
-): Action<{ code: number; change: List<Coin> }> => ({
+): Action<{ code: string; change: List<Coin> }> => ({
   name: 'dispense-item-success',
   payload: { code, change },
 });

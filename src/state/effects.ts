@@ -19,7 +19,7 @@ export function effects(
 ) {
   switch (action.name) {
     case 'enter-code': {
-      const code = action.payload as number;
+      const code = action.payload as string;
       const itemList = machine.items.get(code);
       if (!itemList) {
         return next(itemNotFound());

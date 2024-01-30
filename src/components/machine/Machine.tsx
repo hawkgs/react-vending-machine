@@ -18,7 +18,7 @@ import { DefaultMachine } from './default-machine';
 export default function Machine() {
   const [machine, setMachine] = useState(DefaultMachine);
 
-  const onCodeEnter = (code: number) => {
+  const onCodeEnter = (code: string) => {
     const newMachine = update(machine, enterCode(code));
     setMachine(newMachine);
   };
