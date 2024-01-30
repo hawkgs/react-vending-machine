@@ -1,0 +1,14 @@
+.screen {
+  background-color: rgb(94, 255, 174);
+  box-shadow: 0 0 10px 0 rgb(94, 255, 174);
+  font-family: monospace;
+  color: rgb(17, 44, 30);
+  text-shadow: 0 0 5px rgba(17, 44, 30, 0.2);
+  padding: 10px;
+  border-radius: 5px;
+  width: 300px;
+  height: 150px;
+  overflow-y: scroll;
+  font-weight: bold;
+  list-style-type: none;
+}
