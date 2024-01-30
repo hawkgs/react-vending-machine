@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import './Machine.module.css';
 
 import Screen from '../screen/Screen';
 import Inventory from '../inventory/Inventory';

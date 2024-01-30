@@ -1,4 +1,5 @@
 import { Coin, Machine } from '../../state/models';
+import './CoinsSlot.module.css';
 
 interface CoinsSlotProps {
   machine: Machine;

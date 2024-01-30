@@ -1,4 +1,5 @@
 import { Machine } from '../../state/models';
+import './Inventory.module.css';
 
 interface InventoryProps {
   machine: Machine;

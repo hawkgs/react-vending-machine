@@ -1,4 +1,4 @@
-import 'screen.css';
+import './Screen.module.css';
 import { Machine } from '../../state/models';
 
 interface ScreenProps {

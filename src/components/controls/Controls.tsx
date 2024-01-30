@@ -1,4 +1,5 @@
 import { Machine } from '../../state/models';
+import './Controls.module.css';
 
 interface ControlsProps {
   machine: Machine;
