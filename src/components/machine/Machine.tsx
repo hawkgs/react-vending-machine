@@ -40,12 +40,8 @@ export default function Machine() {
     <div className="machine">
       <Inventory machine={machine} />
       <Screen machine={machine} />
-      <Controls
-        machine={machine}
-        onCodeEnter={onCodeEnter}
-        onCoinsDispense={onCoinsDispense}
-      />
-      <CoinsSlot machine={machine} onCoinInserted={onCoinInserted} />
+      <Controls onCodeEnter={onCodeEnter} onCoinsDispense={onCoinsDispense} />
+      <CoinsSlot onCoinInserted={onCoinInserted} />
     </div>
   );
 }

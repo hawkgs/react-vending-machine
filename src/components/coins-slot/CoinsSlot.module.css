@@ -1,0 +1,15 @@
+.coinsList {
+}
+
+.coin {
+  border-radius: 50%;
+  border: 1px solid red;
+  width: 40px;
+  height: 40px;
+  cursor: pointer;
+
+}
+
+.coin1 {
+  border-color: green;
+}
