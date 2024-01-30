@@ -21,16 +21,21 @@ export default function Screen({ machine }: ScreenProps) {
   const ulList = useRef<HTMLUListElement | null>(null);
 
   useEffect(() => {
-    let message = '';
-
     if (machine.state === State.CoinsInserted) {
       const credit = machine.coinsInSlot.reduce((p, n) => p + n, 0) / 100;
-      message = `Inserted a coin. Current credit: $${credit}`;
+      const message = `Inserted a coin. Current credit: $${credit.toFixed(2)}`;
+      setMessageHistory((msgHistory) => {
+        const lastMsg = msgHistory.last();
+        if (lastMsg?.startsWith('Inserted a coin')) {
+          msgHistory = msgHistory.pop();
+        }
+        return msgHistory.push(message);
+      });
     } else {
-      message = MessagesMap[machine.state];
+      setMessageHistory((msgHistory) =>
+        msgHistory.push(MessagesMap[machine.state]),
+      );
     }
-
-    setMessageHistory((messageHistory) => messageHistory.push(message));
   }, [machine]);
 
   useEffect(() => {
