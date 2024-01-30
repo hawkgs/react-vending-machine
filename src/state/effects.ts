@@ -44,7 +44,7 @@ export function effects(
         return next(cantProcessOrder());
       }
 
-      return next(dispenseItemAttempt(item, change));
+      return next(dispenseItemAttempt(code, change));
     }
 
     case 'cant-process-order':
@@ -53,11 +53,11 @@ export function effects(
     case 'dispense-item-attempt':
       {
         setTimeout(() => {
-          const { item, change } = action.payload as {
-            item: InventoryItem;
+          const { code, change } = action.payload as {
+            code: number;
             change: List<Coin>;
           };
-          next(dispenseItemSuccess(item, change));
+          next(dispenseItemSuccess(code, change));
         }, 3000);
       }
       break;

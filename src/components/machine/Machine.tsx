@@ -5,45 +5,46 @@ import Inventory from '../inventory/Inventory';
 import Controls from '../controls/Controls';
 import CoinsSlot from '../coins-slot/CoinsSlot';
 
-import { Coin, Machine as MachineState } from '../../state/models';
+import { Coin } from '../../state/models';
 import { update } from '../../state/update';
 import {
   dispenseChangeAttempt,
   enterCode,
   insertCoin,
 } from '../../state/actions';
+import { DefaultMachine } from './default-machine';
 
 export default function Machine() {
-  const [machineState, setMachineState] = useState(new MachineState({}));
+  const [machine, setMachine] = useState(DefaultMachine);
 
   const onCodeEnter = (code: number) => {
-    const machine = update(machineState, enterCode(code));
-    setMachineState(machine);
+    const newMachine = update(machine, enterCode(code));
+    setMachine(newMachine);
   };
 
   const onCoinsDispense = () => {
-    const machine = update(
-      machineState,
-      dispenseChangeAttempt(machineState.coinsInSlot),
+    const newMachine = update(
+      machine,
+      dispenseChangeAttempt(machine.coinsInSlot),
     );
-    setMachineState(machine);
+    setMachine(newMachine);
   };
 
   const onCoinInserted = (coin: Coin) => {
-    const machine = update(machineState, insertCoin(coin));
-    setMachineState(machine);
+    const newMachine = update(machine, insertCoin(coin));
+    setMachine(newMachine);
   };
 
   return (
     <div className="machine">
-      <Inventory machine={machineState} />
-      <Screen machine={machineState} />
+      <Inventory machine={machine} />
+      <Screen machine={machine} />
       <Controls
-        machine={machineState}
+        machine={machine}
         onCodeEnter={onCodeEnter}
         onCoinsDispense={onCoinsDispense}
       />
-      <CoinsSlot machine={machineState} onCoinInserted={onCoinInserted} />
+      <CoinsSlot machine={machine} onCoinInserted={onCoinInserted} />
     </div>
   );
 }

@@ -36,10 +36,10 @@ export function reducer(machine: Machine, action: Action<unknown>): Machine {
 
     case 'dispense-item-success':
       {
-        const item = (action.payload as { item: InventoryItem }).item;
-        const updatedItemsList = machine.items.get(item.code)?.pop();
+        const code = (action.payload as { code: number }).code;
+        const updatedItemsList = machine.items.get(code)?.pop();
         const updatedItems = machine.items.set(
-          item.code,
+          code,
           updatedItemsList as List<InventoryItem>,
         );
 

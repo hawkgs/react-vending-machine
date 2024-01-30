@@ -1,5 +1,5 @@
 import { List } from 'immutable';
-import { Coin, InventoryItem } from './models';
+import { Coin } from './models';
 
 type ActionType =
   | 'insert-coin'
@@ -45,19 +45,19 @@ export const cantProcessOrder = (): Action<void> => ({
 });
 
 export const dispenseItemAttempt = (
-  item: InventoryItem,
+  code: number,
   change: List<Coin>,
-): Action<{ item: InventoryItem; change: List<Coin> }> => ({
+): Action<{ code: number; change: List<Coin> }> => ({
   name: 'dispense-item-attempt',
-  payload: { item, change },
+  payload: { code, change },
 });
 
 export const dispenseItemSuccess = (
-  item: InventoryItem,
+  code: number,
   change: List<Coin>,
-): Action<{ item: InventoryItem; change: List<Coin> }> => ({
+): Action<{ code: number; change: List<Coin> }> => ({
   name: 'dispense-item-success',
-  payload: { item, change },
+  payload: { code, change },
 });
 
 export const dispenseChangeAttempt = (

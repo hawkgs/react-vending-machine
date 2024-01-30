@@ -4,22 +4,14 @@ import { List, Map, Record } from 'immutable';
 
 export type Coin = 1 | 2 | 5 | 10 | 20 | 50 | 100 | 200;
 
-// Inventory Item
-
-export type InventoryItemType = 'beverage' | 'snack';
-
 export interface InventoryItemConfig {
-  type?: InventoryItemType;
   name?: string;
   price?: number;
-  code?: number;
 }
 
 const inventoryItemRecord = Record({
-  type: 'beverage',
   name: '',
   price: 0,
-  code: 0,
 });
 
 export class InventoryItem extends inventoryItemRecord {
