@@ -5,18 +5,19 @@ interface CoinsSlotProps {
   onCoinInserted: (coin: Coin) => void;
 }
 
-const Coins: Coin[] = [1, 2, 5, 10, 20, 50, 100, 200];
+const Coins: Coin[] = [1, 5, 10, 25, 50, 100];
 
 function coinFormatPipe(c: Coin) {
   if (c < 100) {
-    return c + 'c';
+    return c;
   }
   return '$' + c / 100;
 }
 
 export default function CoinsSlot({ onCoinInserted }: CoinsSlotProps) {
   return (
-    <div className={styles.coinsList}>
+    <div className={styles.coinsSlot}>
+      <div className={styles.slot} />
       {Coins.map((c: Coin) => (
         <button
           className={`${styles.coin} ${styles['coin' + c]}`}

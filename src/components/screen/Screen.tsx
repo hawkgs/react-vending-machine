@@ -8,7 +8,7 @@ interface ScreenProps {
   machine: Machine;
 }
 
-const Messages: { [key: string]: string } = {
+const MessagesMap: { [key: string]: string } = {
   [State.StandBy]: 'Machine is ready for use!',
   [State.ItemNotFound]: 'Item not found.',
   [State.InsufficientCredit]: 'Insufficient credit',
@@ -27,7 +27,7 @@ export default function Screen({ machine }: ScreenProps) {
       const credit = machine.coinsInSlot.reduce((p, n) => p + n, 0) / 100;
       message = `Inserted a coin. Current credit: $${credit}`;
     } else {
-      message = Messages[machine.state];
+      message = MessagesMap[machine.state];
     }
 
     setMessageHistory((messageHistory) => messageHistory.push(message));
