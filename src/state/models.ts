@@ -23,15 +23,15 @@ export class InventoryItem extends inventoryItemRecord {
 // State
 
 export enum State {
-  StandBy,
-  CoinsInserted,
-  ItemNotFound,
-  ItemUnavailable,
-  InsufficientCredit,
-  CantProcessOrder,
-  DispensingItem,
-  ItemDispensed,
-  DispensingChange,
+  StandBy = 'stand-by',
+  CoinsInserted = 'coins-inserted',
+  ItemNotFound = 'item-not-found',
+  ItemUnavailable = 'item-unavailable',
+  InsufficientCredit = 'insufficient-credit',
+  CantProcessOrder = 'cant-process-order',
+  DispensingItem = 'dispensing-item',
+  ItemDispensed = 'item-dispensed',
+  DispensingChange = 'dispensing-change',
 }
 
 // Machine

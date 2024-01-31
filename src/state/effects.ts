@@ -14,18 +14,20 @@ import { Coin, InventoryItem, Machine } from './models';
 
 export function effects(
   machine: Machine,
-  action: Action<unknown>,
-  next: (action: Action<unknown>) => Machine,
+  action: Action,
+  dispatch: (action: Action) => void,
 ) {
+  console.log('EFFECTS', action);
+
   switch (action.name) {
     case 'enter-code': {
       const code = action.payload as string;
       const itemList = machine.items.get(code);
       if (!itemList) {
-        return next(itemNotFound());
+        return dispatch(itemNotFound());
       }
       if (!itemList?.size) {
-        return next(itemUnavailable());
+        return dispatch(itemUnavailable());
       }
 
       const coinsSum = machine.coinsInSlot.reduce(
@@ -34,36 +36,36 @@ export function effects(
       );
       const item = itemList.first() as InventoryItem;
       if (item.price > coinsSum) {
-        return next(insufficientCredit());
+        return dispatch(insufficientCredit());
       }
 
       // TODO(Georgi): Knapsack
       const changeNum = coinsSum - item.price;
       const change = List([]);
       if (changeNum) {
-        return next(cantProcessOrder());
+        return dispatch(cantProcessOrder());
       }
 
-      return next(dispenseItemAttempt(code, change));
+      return dispatch(dispenseItemAttempt(code, change));
     }
 
     case 'cant-process-order':
-      return next(dispenseChangeAttempt(machine.coinsInSlot));
+      return dispatch(dispenseChangeAttempt(machine.coinsInSlot));
 
     case 'dispense-item-attempt':
       {
         setTimeout(() => {
           const { code, change } = action.payload as {
-            code: number;
+            code: string;
             change: List<Coin>;
           };
-          next(dispenseItemSuccess(code, change));
+          dispatch(dispenseItemSuccess(code, change));
         }, 3000);
       }
       break;
 
     case 'dispense-item-success':
-      return next(
+      return dispatch(
         dispenseChangeAttempt(
           (action.payload as { change: List<Coin> }).change,
         ),
@@ -73,7 +75,7 @@ export function effects(
       {
         setTimeout(() => {
           const change = action.payload as List<Coin>;
-          next(dispenseChangeSuccess(change));
+          dispatch(dispenseChangeSuccess(change));
         }, 3000);
       }
       break;

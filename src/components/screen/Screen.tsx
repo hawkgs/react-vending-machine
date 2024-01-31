@@ -14,6 +14,9 @@ const MessagesMap: { [key: string]: string } = {
   [State.InsufficientCredit]: 'Insufficient credit',
   [State.ItemUnavailable]: 'The item is unavailable',
   [State.CantProcessOrder]: `Can't process order`,
+  [State.DispensingItem]: 'Dispensing item ...',
+  [State.ItemDispensed]: 'Item dispensed!',
+  [State.DispensingChange]: 'Dispensing change ...',
 };
 
 export default function Screen({ machine }: ScreenProps) {

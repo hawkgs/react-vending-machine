@@ -2,7 +2,9 @@ import { List } from 'immutable';
 import { Action } from './actions';
 import { Coin, InventoryItem, Machine, State } from './models';
 
-export function reducer(machine: Machine, action: Action<unknown>): Machine {
+export function reducer(machine: Machine, action: Action): Machine {
+  console.log('REDUCER', action);
+
   switch (action.name) {
     case 'insert-coin':
       {

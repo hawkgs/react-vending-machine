@@ -12,7 +12,7 @@ export const DefaultMachine = new Machine({
   ]),
   items: Map([
     [
-      '10',
+      '11',
       List([
         new InventoryItem({ name: 'Soda', price: 150 }),
         new InventoryItem({ name: 'Soda', price: 150 }),
@@ -21,7 +21,7 @@ export const DefaultMachine = new Machine({
       ]),
     ],
     [
-      '11',
+      '12',
       List([
         new InventoryItem({ name: 'Beer', price: 140 }),
         new InventoryItem({ name: 'Beer', price: 140 }),

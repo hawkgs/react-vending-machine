@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import './Machine.module.css';
 
 import Screen from '../screen/Screen';
@@ -7,8 +7,9 @@ import Controls from '../controls/Controls';
 import CoinsSlot from '../coins-slot/CoinsSlot';
 
 import { Coin } from '../../state/models';
-import { update } from '../../state/update';
+import { createMachineStore } from '../../state/store';
 import {
+  Action,
   dispenseChangeAttempt,
   enterCode,
   insertCoin,
@@ -17,24 +18,23 @@ import { DefaultMachine } from './default-machine';
 
 export default function Machine() {
   const [machine, setMachine] = useState(DefaultMachine);
+  const dispatchRef = useRef<((action: Action) => void) | null>(null);
 
-  const onCodeEnter = (code: string) => {
-    const newMachine = update(machine, enterCode(code));
-    setMachine(newMachine);
-  };
+  const dispatch = (action: Action) =>
+    dispatchRef.current && dispatchRef.current(action);
 
-  const onCoinsDispense = () => {
-    const newMachine = update(
-      machine,
-      dispenseChangeAttempt(machine.coinsInSlot),
-    );
-    setMachine(newMachine);
-  };
+  useEffect(() => {
+    dispatchRef.current = createMachineStore(DefaultMachine, (machine) => {
+      setMachine(() => machine);
+    });
+  }, []);
 
-  const onCoinInserted = (coin: Coin) => {
-    const newMachine = update(machine, insertCoin(coin));
-    setMachine(newMachine);
-  };
+  const onCodeEnter = (code: string) => dispatch(enterCode(code));
+
+  const onCoinsDispense = () =>
+    dispatch(dispenseChangeAttempt(machine.coinsInSlot));
+
+  const onCoinInserted = (coin: Coin) => dispatch(insertCoin(coin));
 
   return (
     <div className="machine">

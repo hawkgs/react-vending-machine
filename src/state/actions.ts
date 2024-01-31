@@ -13,7 +13,7 @@ type ActionType =
   | 'dispense-change-attempt'
   | 'dispense-change-success';
 
-export interface Action<T> {
+export interface Action<T = unknown> {
   name: ActionType;
   payload?: T;
 }
