@@ -22,3 +22,7 @@ button {
   line-height: 1.5;
   font-weight: 400;
 }
+
+#root {
+  padding-top: 50px;
+}
