@@ -3,6 +3,7 @@ import styles from './Screen.module.css';
 
 import { List } from 'immutable';
 import { Machine, State } from '../../state/models';
+import { coinFormatPipe } from '../../utils/helpers';
 
 interface ScreenProps {
   machine: Machine;
@@ -16,7 +17,6 @@ const MessagesMap: { [key: string]: string } = {
   [State.CantProcessOrder]: `Can't process order`,
   [State.DispensingItem]: 'Dispensing item ...',
   [State.ItemDispensed]: 'Item dispensed!',
-  [State.DispensingChange]: 'Dispensing change ...',
 };
 
 export default function Screen({ machine }: ScreenProps) {
@@ -30,22 +30,40 @@ export default function Screen({ machine }: ScreenProps) {
   }, []);
 
   useEffect(() => {
-    if (machine.state === State.CoinsInserted) {
-      const credit = machine.coinsInSlot.reduce((p, n) => p + n, 0) / 100;
-      const message = `Credit: $${credit.toFixed(2)}`;
+    switch (machine.state) {
+      case State.CoinsInserted:
+        {
+          const credit = machine.coinsInSlot.reduce((p, n) => p + n, 0) / 100;
+          const message = `Credit: $${credit.toFixed(2)}`;
 
-      setMessageHistory((msgHistory) => {
-        const lastMsg = msgHistory.last();
+          setMessageHistory((msgHistory) => {
+            const lastMsg = msgHistory.last();
 
-        if (lastMsg?.startsWith('Credit')) {
-          msgHistory = msgHistory.pop();
+            if (lastMsg?.startsWith('Credit')) {
+              msgHistory = msgHistory.pop();
+            }
+            return msgHistory.push(message);
+          });
         }
-        return msgHistory.push(message);
-      });
-    } else {
-      setMessageHistory((msgHistory) =>
-        msgHistory.push(MessagesMap[machine.state]),
-      );
+        break;
+
+      case State.DispensingChange:
+        {
+          if (machine.change.size) {
+            const changeStr = machine.change
+              .map((c) => `(${coinFormatPipe(c)})`)
+              .join(' ');
+            const message = `Dispensing change: ${changeStr} ...`;
+
+            setMessageHistory((msgHistory) => msgHistory.push(message));
+          }
+        }
+        break;
+
+      default:
+        setMessageHistory((msgHistory) =>
+          msgHistory.push(MessagesMap[machine.state]),
+        );
     }
   }, [machine]);
 

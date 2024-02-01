@@ -39,6 +39,7 @@ export enum State {
 interface MachineConfig {
   state?: State;
   coinsInSlot?: List<Coin>;
+  change?: List<Coin>; // Has only UI/presentation purpose
   coins?: Map<Coin, number>;
   items?: Map<string, List<InventoryItem>>;
 }
@@ -46,6 +47,7 @@ interface MachineConfig {
 const machineRecord = Record({
   state: State.StandBy,
   coinsInSlot: List<Coin>([]),
+  change: List<Coin>([]),
   coins: Map<Coin, number>([]),
   items: Map<string, List<InventoryItem>>([]),
 });

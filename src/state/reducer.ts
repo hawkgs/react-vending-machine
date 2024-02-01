@@ -50,7 +50,12 @@ export function reducer(machine: Machine, action: Action): Machine {
       break;
 
     case 'dispense-change-attempt':
-      machine = machine.set('state', State.DispensingChange);
+      {
+        const { change } = action.payload as { change: List<Coin> };
+        machine = machine
+          .set('change', change)
+          .set('state', State.DispensingChange);
+      }
       break;
 
     case 'dispense-change-success':
@@ -70,6 +75,7 @@ export function reducer(machine: Machine, action: Action): Machine {
 
         machine = machine
           .set('coinsInSlot', List([]))
+          .set('change', List([]))
           .set('coins', coins)
           .set('state', State.StandBy);
       }

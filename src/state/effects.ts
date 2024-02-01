@@ -13,6 +13,8 @@ import {
 } from './actions';
 import { Coin, InventoryItem, Machine } from './models';
 
+const AsyncOpWaitTime = 2000;
+
 export function effects(
   machine: Machine,
   action: Action,
@@ -63,31 +65,21 @@ export function effects(
             change: List<Coin>;
           };
           dispatch(dispenseItemSuccess(code, change));
-        }, 3000);
+        }, AsyncOpWaitTime);
       }
       break;
 
-    case 'dispense-item-success':
-      {
-        const { change } = action.payload as { change: List<Coin> };
-        if (!change.size) {
-          return dispatch(machineReady());
-        }
-
-        return dispatch(
-          dispenseChangeAttempt(
-            (action.payload as { change: List<Coin> }).change,
-          ),
-        );
-      }
-      break;
+    case 'dispense-item-success': {
+      const { change } = action.payload as { change: List<Coin> };
+      return dispatch(dispenseChangeAttempt(change));
+    }
 
     case 'dispense-change-attempt':
       {
         setTimeout(() => {
           const change = action.payload as List<Coin>;
           dispatch(dispenseChangeSuccess(change));
-        }, 3000);
+        }, AsyncOpWaitTime);
       }
       break;
 
