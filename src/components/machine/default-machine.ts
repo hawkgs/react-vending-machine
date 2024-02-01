@@ -1,7 +1,7 @@
 import { List, Map } from 'immutable';
 import { InventoryItem, Machine } from '../../state/models';
 
-export const DefaultMachine = new Machine({
+export const InitialMachine = new Machine({
   coins: Map([
     [1, 10],
     [5, 10],
@@ -14,6 +14,37 @@ export const DefaultMachine = new Machine({
     [
       '11',
       List([
+        new InventoryItem({ name: 'Chips', price: 425 }),
+        new InventoryItem({ name: 'Chips', price: 425 }),
+        new InventoryItem({ name: 'Chips', price: 425 }),
+        new InventoryItem({ name: 'Chips', price: 425 }),
+        new InventoryItem({ name: 'Chips', price: 425 }),
+      ]),
+    ],
+    [
+      '12',
+      List([
+        new InventoryItem({ name: 'Pop Corn', price: 375 }),
+        new InventoryItem({ name: 'Pop Corn', price: 375 }),
+        new InventoryItem({ name: 'Pop Corn', price: 375 }),
+        new InventoryItem({ name: 'Pop Corn', price: 375 }),
+        new InventoryItem({ name: 'Pop Corn', price: 375 }),
+      ]),
+    ],
+    [
+      '21',
+      List([
+        new InventoryItem({ name: 'Coffee', price: 200 }),
+        new InventoryItem({ name: 'Coffee', price: 200 }),
+        new InventoryItem({ name: 'Coffee', price: 200 }),
+        new InventoryItem({ name: 'Coffee', price: 200 }),
+        new InventoryItem({ name: 'Coffee', price: 200 }),
+      ]),
+    ],
+    [
+      '31',
+      List([
+        new InventoryItem({ name: 'Soda', price: 150 }),
         new InventoryItem({ name: 'Soda', price: 150 }),
         new InventoryItem({ name: 'Soda', price: 150 }),
         new InventoryItem({ name: 'Soda', price: 150 }),
@@ -21,8 +52,9 @@ export const DefaultMachine = new Machine({
       ]),
     ],
     [
-      '12',
+      '32',
       List([
+        new InventoryItem({ name: 'Beer', price: 140 }),
         new InventoryItem({ name: 'Beer', price: 140 }),
         new InventoryItem({ name: 'Beer', price: 140 }),
         new InventoryItem({ name: 'Beer', price: 140 }),

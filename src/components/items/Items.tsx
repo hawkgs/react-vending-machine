@@ -3,6 +3,9 @@ import { List } from 'immutable';
 import { InventoryItem } from '../../state/models';
 
 const ItemIconsMap: { [key: string]: string } = {
+  ['Chips']: '🍟',
+  ['Pop Corn']: '🍿',
+  ['Coffee']: '☕️',
   ['Soda']: '🥤',
   ['Beer']: '🍺',
 };
