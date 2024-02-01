@@ -9,6 +9,7 @@ import {
   dispenseItemSuccess,
   dispenseChangeAttempt,
   dispenseChangeSuccess,
+  machineReady,
 } from './actions';
 import { Coin, InventoryItem, Machine } from './models';
 
@@ -17,12 +18,18 @@ export function effects(
   action: Action,
   dispatch: (action: Action) => void,
 ) {
-  console.log('EFFECTS', action);
-
   switch (action.name) {
     case 'enter-code': {
       const code = action.payload as string;
       const itemList = machine.items.get(code);
+      const coinsSum = machine.coinsInSlot.reduce(
+        (prev, next) => prev + next,
+        0,
+      );
+
+      if (!coinsSum) {
+        return dispatch(insufficientCredit());
+      }
       if (!itemList) {
         return dispatch(itemNotFound());
       }
@@ -30,10 +37,6 @@ export function effects(
         return dispatch(itemUnavailable());
       }
 
-      const coinsSum = machine.coinsInSlot.reduce(
-        (prev, next) => prev + next,
-        0,
-      );
       const item = itemList.first() as InventoryItem;
       if (item.price > coinsSum) {
         return dispatch(insufficientCredit());
@@ -65,11 +68,19 @@ export function effects(
       break;
 
     case 'dispense-item-success':
-      return dispatch(
-        dispenseChangeAttempt(
-          (action.payload as { change: List<Coin> }).change,
-        ),
-      );
+      {
+        const { change } = action.payload as { change: List<Coin> };
+        if (!change.size) {
+          return dispatch(machineReady());
+        }
+
+        return dispatch(
+          dispenseChangeAttempt(
+            (action.payload as { change: List<Coin> }).change,
+          ),
+        );
+      }
+      break;
 
     case 'dispense-change-attempt':
       {
@@ -79,5 +90,8 @@ export function effects(
         }, 3000);
       }
       break;
+
+    case 'dispense-change-success':
+      return dispatch(machineReady());
   }
 }

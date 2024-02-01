@@ -3,8 +3,6 @@ import { Action } from './actions';
 import { Coin, InventoryItem, Machine, State } from './models';
 
 export function reducer(machine: Machine, action: Action): Machine {
-  console.log('REDUCER', action);
-
   switch (action.name) {
     case 'insert-coin':
       {
@@ -75,6 +73,10 @@ export function reducer(machine: Machine, action: Action): Machine {
           .set('coins', coins)
           .set('state', State.StandBy);
       }
+      break;
+
+    case 'machine-ready':
+      machine = machine.set('state', State.StandBy);
       break;
   }
 

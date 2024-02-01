@@ -2,6 +2,7 @@ import { List } from 'immutable';
 import { Coin } from './models';
 
 type ActionType =
+  | 'machine-ready'
   | 'insert-coin'
   | 'enter-code'
   | 'item-not-found'
@@ -72,4 +73,8 @@ export const dispenseChangeSuccess = (
 ): Action<List<Coin>> => ({
   name: 'dispense-change-success',
   payload: coins,
+});
+
+export const machineReady = (): Action<void> => ({
+  name: 'machine-ready',
 });
