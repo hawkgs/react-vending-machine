@@ -25,11 +25,16 @@ export default function Controls({
     }
   };
 
+  const dispense = () => {
+    setCode('');
+    onCoinsDispense();
+  };
+
   return (
     <div className={styles.controls}>
       <div className={styles.code}>CODE: {code}</div>
       <div className={styles.buttons}>
-        <button className={styles.dispenseBtn} onClick={onCoinsDispense}>
+        <button className={styles.dispenseBtn} onClick={dispense}>
           DISP
         </button>
         <div className={styles.dial}>
