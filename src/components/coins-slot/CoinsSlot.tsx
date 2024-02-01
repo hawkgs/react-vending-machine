@@ -1,8 +1,10 @@
-import { Coin } from '../../state/models';
+import { Coin, Machine } from '../../state/models';
 import { classes } from '../../utils/classes';
+import { isMachineInUse } from '../../utils/helpers';
 import styles from './CoinsSlot.module.css';
 
 interface CoinsSlotProps {
+  machine: Machine;
   onCoinInserted: (coin: Coin) => void;
 }
 
@@ -15,18 +17,22 @@ function coinFormatPipe(c: Coin) {
   return '$' + c / 100;
 }
 
-export default function CoinsSlot({ onCoinInserted }: CoinsSlotProps) {
+export default function CoinsSlot({ onCoinInserted, machine }: CoinsSlotProps) {
   return (
     <div className={styles.coinsSlot}>
-      {Coins.map((c: Coin) => (
-        <button
-          className={classes(styles.coin, styles['coin' + c])}
-          onClick={() => onCoinInserted(c)}
-          key={c}
-        >
-          {coinFormatPipe(c)}
-        </button>
-      ))}
+      <p>Pick a coin to insert in the slot</p>
+      <div className={styles.coins}>
+        {Coins.map((c: Coin) => (
+          <button
+            className={classes(styles.coin, styles['coin' + c])}
+            onClick={() => onCoinInserted(c)}
+            key={c}
+            disabled={isMachineInUse(machine)}
+          >
+            {coinFormatPipe(c)}
+          </button>
+        ))}
+      </div>
     </div>
   );
 }

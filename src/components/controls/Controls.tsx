@@ -1,18 +1,32 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import styles from './Controls.module.css';
+import { Machine, State } from '../../state/models';
+import { isMachineInUse } from '../../utils/helpers';
 
 interface ControlsProps {
+  machine: Machine;
   onCodeEnter: (code: string) => void;
   onCoinsDispense: () => void;
 }
 
 export default function Controls({
+  machine,
   onCodeEnter,
   onCoinsDispense,
 }: ControlsProps) {
   const [code, setCode] = useState<string>('');
 
+  useEffect(() => {
+    if (machine.state === State.StandBy) {
+      setCode('');
+    }
+  }, [machine]);
+
   const onButtonClick = (digit: string) => {
+    if (isMachineInUse(machine)) {
+      return;
+    }
+
     if (code.length > 1) {
       setCode(digit);
     } else {
@@ -26,6 +40,10 @@ export default function Controls({
   };
 
   const dispense = () => {
+    if (isMachineInUse(machine)) {
+      return;
+    }
+
     setCode('');
     onCoinsDispense();
   };
@@ -34,7 +52,11 @@ export default function Controls({
     <div className={styles.controls}>
       <div className={styles.code}>CODE: {code}</div>
       <div className={styles.buttons}>
-        <button className={styles.dispenseBtn} onClick={dispense}>
+        <button
+          className={styles.dispenseBtn}
+          onClick={dispense}
+          disabled={!machine.coinsInSlot.size}
+        >
           DISP
         </button>
         <div className={styles.dial}>

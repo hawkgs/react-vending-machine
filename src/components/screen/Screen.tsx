@@ -9,10 +9,10 @@ interface ScreenProps {
 }
 
 const MessagesMap: { [key: string]: string } = {
-  [State.StandBy]: 'Machine is ready for use!',
+  [State.StandBy]: 'Ready for use!',
   [State.ItemNotFound]: 'Item not found.',
   [State.InsufficientCredit]: 'Insufficient credit',
-  [State.ItemUnavailable]: 'The item is unavailable',
+  [State.ItemUnavailable]: 'Item unavailable',
   [State.CantProcessOrder]: `Can't process order`,
   [State.DispensingItem]: 'Dispensing item ...',
   [State.ItemDispensed]: 'Item dispensed!',
@@ -32,12 +32,12 @@ export default function Screen({ machine }: ScreenProps) {
   useEffect(() => {
     if (machine.state === State.CoinsInserted) {
       const credit = machine.coinsInSlot.reduce((p, n) => p + n, 0) / 100;
-      const message = `Inserted a coin. Credit: $${credit.toFixed(2)}`;
+      const message = `Credit: $${credit.toFixed(2)}`;
 
       setMessageHistory((msgHistory) => {
         const lastMsg = msgHistory.last();
 
-        if (lastMsg?.startsWith('Inserted a coin')) {
+        if (lastMsg?.startsWith('Credit')) {
           msgHistory = msgHistory.pop();
         }
         return msgHistory.push(message);

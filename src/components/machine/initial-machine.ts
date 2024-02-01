@@ -42,7 +42,7 @@ export const InitialMachine = new Machine({
       ]),
     ],
     [
-      '31',
+      '22',
       List([
         new InventoryItem({ name: 'Soda', price: 150 }),
         new InventoryItem({ name: 'Soda', price: 150 }),
@@ -52,13 +52,13 @@ export const InitialMachine = new Machine({
       ]),
     ],
     [
-      '32',
+      '31',
       List([
-        new InventoryItem({ name: 'Beer', price: 140 }),
-        new InventoryItem({ name: 'Beer', price: 140 }),
-        new InventoryItem({ name: 'Beer', price: 140 }),
-        new InventoryItem({ name: 'Beer', price: 140 }),
-        new InventoryItem({ name: 'Beer', price: 140 }),
+        new InventoryItem({ name: 'Beer', price: 240 }),
+        new InventoryItem({ name: 'Beer', price: 240 }),
+        new InventoryItem({ name: 'Beer', price: 240 }),
+        new InventoryItem({ name: 'Beer', price: 240 }),
+        new InventoryItem({ name: 'Beer', price: 240 }),
       ]),
     ],
   ]),

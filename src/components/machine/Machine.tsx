@@ -12,7 +12,8 @@ import {
   enterCode,
   insertCoin,
 } from '../../state/actions';
-import { InitialMachine } from './default-machine';
+import { InitialMachine } from './initial-machine';
+import CoinInventory from '../coin-inventory/CoinInventory';
 
 export default function Machine() {
   const [machine, dispatch] = useMachineStore(InitialMachine);
@@ -31,12 +32,14 @@ export default function Machine() {
         <div className={styles.screenAndControls}>
           <Screen machine={machine} />
           <Controls
+            machine={machine}
             onCodeEnter={onCodeEnter}
             onCoinsDispense={onCoinsDispense}
           />
         </div>
       </div>
-      <CoinsSlot onCoinInserted={onCoinInserted} />
+      <CoinInventory machine={machine} className={styles.coinInventory} />
+      <CoinsSlot machine={machine} onCoinInserted={onCoinInserted} />
     </div>
   );
 }
