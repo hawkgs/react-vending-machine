@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import './Controls.module.css';
+import styles from './Controls.module.css';
 
 interface ControlsProps {
   onCodeEnter: (code: string) => void;
@@ -26,17 +26,21 @@ export default function Controls({
   };
 
   return (
-    <>
-      <div>CODE: {code}</div>
-      <button onClick={onCoinsDispense}>Dispense</button>
-      <div>
-        <button onClick={() => onButtonClick('1')}>1</button>
-        <button onClick={() => onButtonClick('2')}>2</button>
-        <button onClick={() => onButtonClick('3')}>3</button>
-        <button onClick={() => onButtonClick('4')}>4</button>
-        <button onClick={() => onButtonClick('5')}>5</button>
-        <button onClick={() => onButtonClick('6')}>6</button>
+    <div className={styles.controls}>
+      <div className={styles.code}>CODE: {code}</div>
+      <div className={styles.buttons}>
+        <button className={styles.dispenseBtn} onClick={onCoinsDispense}>
+          DISP
+        </button>
+        <div className={styles.dial}>
+          <button onClick={() => onButtonClick('1')}>1</button>
+          <button onClick={() => onButtonClick('2')}>2</button>
+          <button onClick={() => onButtonClick('3')}>3</button>
+          <button onClick={() => onButtonClick('4')}>4</button>
+          <button onClick={() => onButtonClick('5')}>5</button>
+          <button onClick={() => onButtonClick('6')}>6</button>
+        </div>
       </div>
-    </>
+    </div>
   );
 }

@@ -1,0 +1,69 @@
+.controls {
+  width: 240px;
+}
+
+.code {
+  background-color: rgb(94, 255, 174);
+  box-shadow: 0 0 5px 0 rgb(94, 255, 174);
+  font-family: monospace;
+  color: rgb(17, 44, 30);
+  text-shadow: 0 0 5px rgba(17, 44, 30, 0.2);
+  border-radius: 5px;
+  padding: 5px;
+  font-size: 20px;
+  margin: 5px;
+}
+
+.controls button {
+  position: relative;
+  background-color: black;
+  border: none;
+  border-radius: 5px;
+  margin: 5px;
+  cursor: pointer;
+}
+
+.controls button::after {
+  content: '';
+  position: absolute;
+  width: inherit;
+  height: inherit;
+  border-radius: 5px;
+  background-color: #494949;
+  top: 4px;
+  left: 0;
+  z-index: -1;
+}
+
+.controls button:hover {
+  background-color: #333;
+}
+
+.controls button:focus {
+  top: 2px;
+}
+
+.controls button:focus::after {
+  top: 2px;
+}
+
+.buttons {
+  display: flex;
+}
+
+.dispenseBtn {
+  font-size: 16px;
+  font-weight: bold;
+  width: 50px;
+  height: 110px;
+}
+
+.dial {
+  width: 185px;
+}
+
+.dial > button {
+  width: 50px;
+  height: 50px;
+  font-size: 25px;
+}
