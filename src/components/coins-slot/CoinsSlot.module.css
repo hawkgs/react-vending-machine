@@ -3,13 +3,6 @@
   align-items: center;
 }
 
-.slot {
-  width: 8px;
-  height: 60px;
-  background-color: black;
-  margin-right: 25px;
-}
-
 .coin {
   border-radius: 50%;
   width: 40px;
@@ -18,19 +11,24 @@
   box-sizing: border-box;
   margin: 0 10px;
   transition: box-shadow 150ms ease;
+  font-family: serif;
+  font-weight: bold;
 }
 
 .coin:hover {
   box-shadow: 0 0 20px 0 rgb(8, 150, 216);
 }
 
-.coin1, .coin5 {
+.coin1,
+.coin5 {
   background-color: goldenrod;
   border: 2px solid rgb(163, 123, 24);
   color: rgb(107, 81, 17);
 }
 
-.coin10, .coin25, .coin50 {
+.coin10,
+.coin25,
+.coin50 {
   background-color: silver;
   border: 2px solid rgb(136, 136, 136);
   color: rgb(69, 69, 69);
@@ -42,7 +40,8 @@
   font-size: 20px;
 }
 
-.coin5, .coin10 {
+.coin5,
+.coin10 {
   width: 45px;
   height: 45px;
   font-size: 21px;

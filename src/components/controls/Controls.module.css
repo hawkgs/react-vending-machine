@@ -1,5 +1,5 @@
 .controls {
-  width: 240px;
+  width: 235px;
 }
 
 .code {
@@ -11,7 +11,7 @@
   border-radius: 5px;
   padding: 5px;
   font-size: 20px;
-  margin: 5px;
+  margin: 5px 5px 5px 0;
 }
 
 .controls button {
@@ -57,6 +57,7 @@
   width: 100%;
   max-width: 50px;
   height: 110px;
+  margin-left: 0 !important;
 }
 
 .dial {

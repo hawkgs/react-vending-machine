@@ -1,4 +1,5 @@
 import { Coin } from '../../state/models';
+import { classes } from '../../utils/classes';
 import styles from './CoinsSlot.module.css';
 
 interface CoinsSlotProps {
@@ -17,10 +18,9 @@ function coinFormatPipe(c: Coin) {
 export default function CoinsSlot({ onCoinInserted }: CoinsSlotProps) {
   return (
     <div className={styles.coinsSlot}>
-      <div className={styles.slot} />
       {Coins.map((c: Coin) => (
         <button
-          className={`${styles.coin} ${styles['coin' + c]}`}
+          className={classes(styles.coin, styles['coin' + c])}
           onClick={() => onCoinInserted(c)}
           key={c}
         >

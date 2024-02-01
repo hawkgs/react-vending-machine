@@ -10,7 +10,7 @@ export default function Inventory({ machine }: InventoryProps) {
   return (
     <div className={styles.inventory}>
       {machine.items.toArray().map(([code, items]) => (
-        <div key={code}>
+        <div className={styles.itemRow} key={code}>
           <div className={styles.code}>{code}</div>
           <div className={styles.price}>
             ${((items.first()?.price || 0) / 100).toFixed(2)}

@@ -1,8 +1,35 @@
 .inventory {
+  width: 400px;
+}
 
+.itemRow {
+  display: flex;
+  align-items: center;
+  border-bottom: 1px solid #595959;
+  padding: 0 10px;
 }
 
 .code {
+  display: inline-block !important;
   background-color: white;
   color: black;
+  width: 30px;
+  display: flex;
+  text-align: center;
+  padding: 4px;
+  font-size: 18px;
+  font-family: monospace;
+  border-radius: 2px;
+  margin-right: 10px;
+}
+
+.price {
+  background-color: #21a649;
+  padding: 2px 5px;
+  border-radius: 2px;
+  font-family: serif;
+  font-weight: bold;
+  font-size: 20px;
+  text-shadow: 0 0 1px rgba(0, 0, 0, 0.5);
+  margin-right: 25px;
 }

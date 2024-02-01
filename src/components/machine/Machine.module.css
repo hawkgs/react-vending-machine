@@ -1,0 +1,14 @@
+.machine {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.main {
+  display: flex;
+  margin-bottom: 25px;
+}
+
+.screenAndControls {
+  margin-left: 20px;
+}
