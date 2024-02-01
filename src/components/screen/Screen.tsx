@@ -24,11 +24,19 @@ export default function Screen({ machine }: ScreenProps) {
   const ulList = useRef<HTMLUListElement | null>(null);
 
   useEffect(() => {
+    return () => {
+      setMessageHistory(() => List([]));
+    };
+  }, []);
+
+  useEffect(() => {
     if (machine.state === State.CoinsInserted) {
       const credit = machine.coinsInSlot.reduce((p, n) => p + n, 0) / 100;
-      const message = `Inserted a coin. Current credit: $${credit.toFixed(2)}`;
+      const message = `Inserted a coin. Credit: $${credit.toFixed(2)}`;
+
       setMessageHistory((msgHistory) => {
         const lastMsg = msgHistory.last();
+
         if (lastMsg?.startsWith('Inserted a coin')) {
           msgHistory = msgHistory.pop();
         }
