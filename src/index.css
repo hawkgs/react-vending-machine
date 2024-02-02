@@ -34,7 +34,7 @@ a:hover {
 }
 
 #root {
-  padding-top: 50px;
+  padding-top: 20px;
 }
 
 h1 {
@@ -42,6 +42,7 @@ h1 {
   font-weight: 500;
   font-size: 30px;
   text-shadow: 2px 3px 0 #000;
+  margin-top: 0;
 }
 
 footer {
