@@ -2,7 +2,7 @@
 
 A simple React toy project that simulates a vending machine.
 
-**[Live Demo](https://github.com/hawkgs/react-vending-machine)**
+**[Live Demo](https://hawkgs-rvm.netlify.com)**
 
 ![Screenshot](./assets/demo.png)
 
