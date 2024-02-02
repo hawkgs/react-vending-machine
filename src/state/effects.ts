@@ -12,6 +12,7 @@ import {
   machineReady,
 } from './actions';
 import { Coin, InventoryItem, Machine } from './models';
+import { processChange } from '../utils/subset-sum';
 
 const AsyncOpWaitTime = 2000;
 
@@ -44,11 +45,26 @@ export function effects(
         return dispatch(insufficientCredit());
       }
 
-      // TODO(Georgi): Knapsack
-      const changeNum = coinsSum - item.price;
-      const change = List([]);
-      if (changeNum) {
-        return dispatch(cantProcessOrder());
+      const targetChange = coinsSum - item.price;
+      let change = List<Coin>([]);
+
+      if (targetChange) {
+        const allCoins = machine.coins
+          .map((qt, coin) => List(new Array<Coin>(qt).fill(coin)))
+          .toList()
+          .reduce((p, c) => p.concat(c), List<Coin>([]))
+          .concat(machine.coinsInSlot);
+
+        const { cantProcess, changeCoins } = processChange(
+          allCoins,
+          targetChange,
+        );
+
+        if (cantProcess) {
+          return dispatch(cantProcessOrder());
+        }
+
+        change = changeCoins;
       }
 
       return dispatch(dispenseItemAttempt(code, change));

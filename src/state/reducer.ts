@@ -51,7 +51,7 @@ export function reducer(machine: Machine, action: Action): Machine {
 
     case 'dispense-change-attempt':
       {
-        const { change } = action.payload as { change: List<Coin> };
+        const change = action.payload as List<Coin>;
         machine = machine
           .set('change', change)
           .set('state', State.DispensingChange);

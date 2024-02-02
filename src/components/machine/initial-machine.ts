@@ -5,10 +5,10 @@ export const InitialMachine = new Machine({
   coins: Map([
     [1, 10],
     [5, 10],
-    [10, 10],
-    [25, 10],
-    [50, 10],
-    [100, 10],
+    [10, 5],
+    [25, 5],
+    [50, 5],
+    [100, 5],
   ]),
   items: Map([
     [
