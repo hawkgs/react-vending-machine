@@ -51,8 +51,8 @@ export default function Screen({ machine }: ScreenProps) {
         {
           if (machine.change.size) {
             const changeStr = machine.change
-              .map((c) => `(${coinFormatPipe(c)})`)
-              .join(' ');
+              .map((c) => `${coinFormatPipe(c)}`)
+              .join(', ');
             const message = `Dispensing change: ${changeStr} ...`;
 
             setMessageHistory((msgHistory) => msgHistory.push(message));

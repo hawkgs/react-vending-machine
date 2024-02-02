@@ -13,7 +13,7 @@ import {
   insertCoin,
 } from '../../state/actions';
 import { InitialMachine } from './initial-machine';
-import CoinInventory from '../coin-inventory/CoinInventory';
+import CoinRepository from '../coin-respository/CoinRepository';
 
 export default function Machine() {
   const [machine, dispatch] = useMachineStore(InitialMachine);
@@ -38,7 +38,7 @@ export default function Machine() {
           />
         </div>
       </div>
-      <CoinInventory machine={machine} className={styles.coinInventory} />
+      <CoinRepository machine={machine} className={styles.coinInventory} />
       <CoinsSlot machine={machine} onCoinInserted={onCoinInserted} />
     </div>
   );

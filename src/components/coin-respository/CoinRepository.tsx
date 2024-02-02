@@ -1,20 +1,20 @@
-import styles from './CoinInventory.module.css';
+import styles from './CoinRepository.module.css';
 import { Machine } from '../../state/models';
 import { classes } from '../../utils/classes';
 import { coinFormatPipe } from '../../utils/helpers';
 
-interface CoinInventoryProps {
+interface CoinRepositoryProps {
   machine: Machine;
   className?: string;
 }
 
-export default function CoinInventory({
+export default function CoinRepository({
   machine,
   className,
-}: CoinInventoryProps) {
+}: CoinRepositoryProps) {
   return (
-    <div className={classes(styles.coinInventory, className)}>
-      <p>Machine Coin Inventory</p>
+    <div className={classes(styles.coinRepository, className)}>
+      <p>Machine Coin Repository</p>
       <code className={styles.coins}>
         {machine.coins.toArray().map(([coin, quantity]) => (
           <span key={coin}>

@@ -1,11 +1,11 @@
-.coinInventory > code {
+.coinRepository > code {
   background-color: #000;
   color: #fff;
   padding: 5px 10px;
   border-radius: 5px;
 }
 
-.coinInventory p {
+.coinRepository p {
   margin-top: 0;
   text-align: center;
   font-size: 12px;
@@ -14,6 +14,6 @@
   font-weight: bold;
 }
 
-.coinInventory span {
+.coinRepository span {
   margin: 0 10px;
 }

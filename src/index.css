@@ -23,6 +23,28 @@ button {
   font-weight: 400;
 }
 
+a {
+  font-weight: 500;
+  color: #646cff;
+  text-decoration: inherit;
+}
+
+a:hover {
+  color: #535bf2;
+}
+
 #root {
   padding-top: 50px;
+}
+
+h1 {
+  text-align: center;
+  font-weight: 500;
+  font-size: 30px;
+  text-shadow: 2px 3px 0 #000;
+}
+
+footer {
+  padding: 40px 0;
+  text-align: center;
 }
