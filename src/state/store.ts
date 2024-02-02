@@ -4,6 +4,13 @@ import { effects } from './effects';
 import { Machine } from './models';
 import { reducer } from './reducer';
 
+// Note(Georgi): The initial idea was to implement a very
+// simple state machine that suits the needs of the current app.
+// However, the need of some sort of effects arised, so
+// the final solution turned out as a rather full-fledged
+// Redux store. In retrospect, even if the current approach
+// is simple enough, the existing 3rd party Redux solutions
+// might be more suitable as they are well-tested.
 function createMachineStore(
   initialMachine: Machine,
   onStateChanges: (m: Machine) => void,

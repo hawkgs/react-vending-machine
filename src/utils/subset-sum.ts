@@ -24,24 +24,26 @@ export function processChange(
    * @returns Whether the operation can be processed or not
    */
   function isSubsetSum(ac: Coin[], tc: number, n: number, ch: Coin[]): boolean {
-    // The operation can be processed (subset found)
+    // Note(Georgi): The operation can be processed (subset found)
     if (!tc) {
       changeCoins = ch;
       return true;
     }
-    // End reached without a suitable subset || subset went over the target change (i.e. negative TC)
+    // Note(Georgi): End reached without a suitable subset ||
+    // subset went over the target change (i.e. negative TC)
     if (!n || tc < 0) {
       return false;
     }
 
-    // Exclude last coin from the subset calc || include last coin
+    // Note(Georgi): Exclude last coin from the subset calc || include last coin
     return (
       isSubsetSum(ac, tc - ac[n - 1], n - 1, [...ch, ac[n - 1]]) ||
       isSubsetSum(ac, tc, n - 1, ch)
     );
   }
 
-  // Should be calculated before
+  // Note(Georgi): Should be calculated before returning
+  // the output since "changeCoins" must be set prior to that.
   const cantProcess = !isSubsetSum(
     allCoins.toArray(),
     targetChange,

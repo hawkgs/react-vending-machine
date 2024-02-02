@@ -2,6 +2,8 @@ import { List } from 'immutable';
 import { Action } from './actions';
 import { Coin, InventoryItem, Machine, State } from './models';
 
+// Todo(Georgi): Define action in such way that payload type casting
+// won't be needed.
 export function reducer(machine: Machine, action: Action): Machine {
   switch (action.name) {
     case 'insert-coin':
