@@ -1,5 +1,14 @@
-import { List } from 'immutable';
 import { Coin } from '../state/models';
+
+export interface ProcessChangeSignature {
+  allCoins: Coin[];
+  targetChange: number;
+}
+
+export interface ProcessChangeOutput {
+  cantProcess: boolean;
+  changeCoins: Coin[];
+}
 
 /**
  * Check if the machine can dispense change based on the available coins
@@ -8,10 +17,10 @@ import { Coin } from '../state/models';
  * @param targetChange Target change
  * @returns If the operation can be processed and the respective change (in coins)
  */
-export function processChange(
-  allCoins: List<Coin>,
-  targetChange: number,
-): { cantProcess: boolean; changeCoins: List<Coin> } {
+export function processChange({
+  allCoins,
+  targetChange,
+}: ProcessChangeSignature): ProcessChangeOutput {
   let changeCoins: Coin[] = [];
 
   /**
@@ -44,15 +53,10 @@ export function processChange(
 
   // Note(Georgi): Should be calculated before returning
   // the output since "changeCoins" must be set prior to that.
-  const cantProcess = !isSubsetSum(
-    allCoins.toArray(),
-    targetChange,
-    allCoins.size,
-    [],
-  );
+  const cantProcess = !isSubsetSum(allCoins, targetChange, allCoins.length, []);
 
   return {
-    changeCoins: List(changeCoins),
+    changeCoins,
     cantProcess,
   };
 }

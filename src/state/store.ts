@@ -13,6 +13,7 @@ import { reducer } from './reducer';
 // might be more suitable as they are well-tested.
 function createMachineStore(
   initialMachine: Machine,
+  worker: Worker,
   onStateChanges: (m: Machine) => void,
 ) {
   let machine = initialMachine;
@@ -20,7 +21,7 @@ function createMachineStore(
   const dispatch = (action: Action) => {
     machine = reducer(machine, action);
     onStateChanges(machine);
-    setTimeout(() => effects(machine, action, dispatch));
+    setTimeout(() => effects(machine, action, worker, dispatch));
   };
 
   return dispatch;
@@ -36,9 +37,21 @@ export function useMachineStore(
     dispatchRef.current && dispatchRef.current(action);
 
   useEffect(() => {
-    dispatchRef.current = createMachineStore(initialState, (machine) => {
-      setMachine(() => machine);
+    const worker = new Worker(new URL('../utils/worker.ts', import.meta.url), {
+      type: 'module',
     });
+
+    dispatchRef.current = createMachineStore(
+      initialState,
+      worker,
+      (machine) => {
+        setMachine(() => machine);
+      },
+    );
+
+    return () => {
+      worker.terminate();
+    };
   }, []);
 
   return [machine, dispatch];
