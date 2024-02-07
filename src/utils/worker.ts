@@ -3,7 +3,7 @@ import {
   ProcessChangeOutput,
   ProcessChangeSignature,
   processChange,
-} from './subset-sum';
+} from './process-change';
 
 type MessageType = 'process-change-request' | 'process-change-response';
 

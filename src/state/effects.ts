@@ -57,6 +57,7 @@ export function effects(
             .concat(machine.coinsInSlot)
             .toArray();
 
+          // Note(Georgi): Don't use addEventListener. It'll add a listener on every dispatch.
           worker.onmessage = (msg: MessageEvent<ProcessChangeResponse>) => {
             if (msg.data.type === 'process-change-response') {
               const { cantProcess, changeCoins } = msg.data.payload;
