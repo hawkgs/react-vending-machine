@@ -39,3 +39,23 @@ test('It be able to return change (50c)', () => {
   expect(cantProcess).toBeFalsy();
   expect(changeCoins).toEqual([50]);
 });
+
+test('It be able to return 75c change (50c, 25c)', () => {
+  const { cantProcess, changeCoins } = processChange({
+    allCoins: [50, 50, 100, 25, 10],
+    targetChange: 75,
+  });
+
+  expect(cantProcess).toBeFalsy();
+  expect(changeCoins.sort()).toEqual([25, 50]);
+});
+
+test('It be able to return 97c change (1c, 1c, 10c, 10c, 25c, 50c)', () => {
+  const { cantProcess, changeCoins } = processChange({
+    allCoins: [100, 50, 25, 10, 10, 5, 1, 1, 1],
+    targetChange: 97,
+  });
+
+  expect(cantProcess).toBeFalsy();
+  expect(changeCoins.sort()).toEqual([1, 1, 10, 10, 25, 50]);
+});
