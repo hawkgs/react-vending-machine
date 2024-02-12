@@ -24,12 +24,6 @@ export default function Screen({ machine }: ScreenProps) {
   const ulList = useRef<HTMLUListElement | null>(null);
 
   useEffect(() => {
-    return () => {
-      setMessageHistory(() => List([]));
-    };
-  }, []);
-
-  useEffect(() => {
     switch (machine.state) {
       case State.CoinsInserted:
         {
@@ -65,6 +59,10 @@ export default function Screen({ machine }: ScreenProps) {
           msgHistory.push(MessagesMap[machine.state]),
         );
     }
+
+    return () => {
+      setMessageHistory(() => List([]));
+    };
   }, [machine]);
 
   useEffect(() => {
