@@ -37,14 +37,14 @@ export enum State {
 // Machine
 
 interface MachineConfig {
-  state?: State;
-  coinsInSlot?: List<Coin>;
-  change?: List<Coin>; // Has only UI/presentation purpose
-  coins?: Map<Coin, number>;
-  items?: Map<string, List<InventoryItem>>;
+  state: State;
+  coinsInSlot: List<Coin>;
+  change: List<Coin>; // Has only UI/presentation purpose
+  coins: Map<Coin, number>;
+  items: Map<string, List<InventoryItem>>;
 }
 
-const machineRecord = Record({
+const machineRecord = Record<MachineConfig>({
   state: State.StandBy,
   coinsInSlot: List<Coin>([]),
   change: List<Coin>([]),
@@ -53,7 +53,7 @@ const machineRecord = Record({
 });
 
 export class Machine extends machineRecord {
-  constructor(config: MachineConfig) {
+  constructor(config: Partial<MachineConfig>) {
     super(config);
   }
 }
